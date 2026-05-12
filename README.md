@@ -23,6 +23,11 @@ PowerShell scripts and detection-method templates for deploying Visual Studio Pr
 - SCCM / MECM with the ConfigurationManager PowerShell module on the admin box (only needed for creating the Applications; the scripts themselves run on clients).
 - Endpoint with the SCCM client and access to the layout share.
 
+## Constraints
+
+- **Layout path must be fewer than 80 characters.** Per [Microsoft's docs](https://learn.microsoft.com/en-us/visualstudio/install/create-a-network-installation-of-visual-studio): "The layout path must be fewer than 80 characters; some organizations successfully use symbolic links to work around the 80-character limitation." Anything you pass as `-LayoutPath` to these scripts (or to the bootstrapper) inherits that limit — packages inside the layout extend it further and trip Windows `MAX_PATH` if the root is too long. Pick a short root (e.g. `D:\Sources\VS2022\Pro\VSLayout`) or symlink a deeper share to a shorter path.
+- **Storage is bigger than you think.** Microsoft cites ~40 GB Community / ~50 GB Enterprise per language for a fresh layout. In practice, multiple editions + language packs + accumulated `Archive\` folders from periodic updates push real-world layouts into the hundreds of gigabytes or terabytes. Run `Maintain-VSLayout.ps1 -Operation Clean` after refreshes, and plan share capacity accordingly.
+
 ## Quick start — one edition, end to end
 
 1. **Build the layout** (one-time, plus periodic refresh).
