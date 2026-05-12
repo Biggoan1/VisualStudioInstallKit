@@ -1,0 +1,9 @@
+{
+  "installChannelUri": ".\\ChannelManifest.json",
+  "channelUri": "\\\\<file-share>\\Sources\\VisualStudio\\<Year>\\<Edition>\\VSLayout",
+  "installCatalogUri": ".\\Catalog.json",
+  "channelId": "VisualStudio.17.Release",
+  "productId": "Microsoft.VisualStudio.Product.Professional",
+  "addProductLang": ["en-US"],
+  "arch": "x64"
+}

@@ -1,0 +1,15 @@
+# Local logs
+*.log
+
+# Layout artifacts (never commit a layout to the repo — it's gigabytes)
+VSLayout/
+VSLayout-Staging/
+Archive/
+Catalog.json
+ChannelManifest.json
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
