@@ -74,6 +74,13 @@ Start-Transcript -Path $logFile -Append
 Write-Host "Action=$Action Edition=$Edition"
 Write-Host "LayoutPath=$LayoutPath"
 
+# --- Path-length sanity check -----------------------------------------------
+# Microsoft documents a layout path limit of fewer than 80 characters:
+# https://learn.microsoft.com/en-us/visualstudio/install/create-a-network-installation-of-visual-studio
+if ($LayoutPath.Length -ge 80) {
+    Write-Warning ("LayoutPath is {0} characters. Microsoft documents an 80-character limit on layout paths; installs may fail or produce confusing MAX_PATH errors. Consider a shorter path or a symbolic link." -f $LayoutPath.Length)
+}
+
 # --- Resolve the bootstrapper inside the layout ------------------------------
 $bootstrapperName = switch ($Edition) {
     'Professional' { 'vs_professional.exe' }
